@@ -18,5 +18,6 @@ true
 {ok,"bingbing"}
 
 %% 30秒後キャッシュから削除されたため
+
 4> simple_cache:lookup(1).
 {error,not_found}
