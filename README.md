@@ -19,3 +19,20 @@ true
 4> simple_cache:lookup(1).
 {error,not_found}
 ```
+
+redbugでデバッグの一例
+
+```
+66> redbug:start("sc_element:handle_cast(delete, _) ->return;stack", [ {time, 10000}]).
+{42,1}
+67> simple_cache:delete(9).
+ok
+
+% 22:37:48 <0.5429.0>(dead)
+% sc_element:handle_cast(delete, {state,"mike",86400,63605513944})
+  proc_lib:init_p_do_apply/3
+
+% 22:37:48 <0.5429.0>(dead)
+% sc_element:handle_cast/2 -> {stop,normal,{state,"mike",86400,63605513944}}
+redbug done, timeout - 1
+```
